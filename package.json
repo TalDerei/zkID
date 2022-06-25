@@ -23,6 +23,7 @@
     "solidity-coverage": "^0.7.21"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
     "@typechain/hardhat": "^6.1.2",
     "ts-node": "^10.8.1"
   }
