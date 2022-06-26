@@ -35,19 +35,19 @@ export default function Page() {
 
   return (
     <main ref={vantaRef}>
-      <section class="general">
-        <div class="homepage">
+      <section className="general">
+        <div className="homepage">
             <large><u>zkID</u></large>
           <br></br>
           <br></br>
-          <div class="homepag-sub">
+          <div className="homepag-sub">
             <small>Privacy-Preserving Proof-of-Personhood Protocol (PPPoPP) enabling</small>
             <br></br>
             <small>a sybil resistant quadratic voting mechanism</small>
           </div>
         </div>
       </section>
-      <div class="pairs">
+      <div className="pairs">
         <div>
           <Footer />
         </div>

@@ -103,27 +103,27 @@ export default function Enter() {
 
   return (
     <main ref={vantaRef}>
-      <section class="general">
+      <section className="general">
         <br></br>
         <br></br>
-        <div class="wager">
+        <div className="wager">
             <large><b>WORLD ID VERIFICATION</b></large>
           <br></br>
           <br></br>
-          <div class="homepag-sub">
+          <div className="homepag-sub">
             {/* <small>kdmnksd</small> */}
           </div>
-          <button class="button button1 key" onClick={Collect}>Airdrop Tokens</button>
-          <button class="button button1 key" onClick={Verify}>Verify Worldcoin ID</button>
+          <button className="button button1 key" onClick={Collect}>Airdrop Tokens</button>
+          <button className="button button1 key" onClick={Verify}>Verify Worldcoin ID</button>
               <Link href='/airdrop/vote' passHref>
-                <button class="button button1 key">Vote in Poll</button>
+                <button className="button button1 key">Vote in Poll</button>
               </Link>
         </div>
-          <div class="card-commitment">
-            <div class="card-header">
+          <div className="card-commitment">
+            <div className="card-header">
             <b>Transaction Hash:</b>
             </div>
-            <div class="card-body">
+            <div className="card-body">
               {state.transactionHash === ''?
                 <div>
                 </div> 
@@ -140,15 +140,15 @@ export default function Enter() {
           </div>
           <div>
         </div>
-        <div class="test-lottery">
+        <div className="test-lottery">
           <p>
           <Link href='/airdrop/test' passHref>
-            <a class="test">
+            <a className="test">
             </a>
           </Link>
           </p>
         </div>
-        <div className="mb-10">
+        <div classNameName="mb-10">
           <GoBack />
         </div>
         <div>
@@ -157,7 +157,7 @@ export default function Enter() {
         <div>
             <ViewSourceCode />
         </div>
-        <div class="widget">
+        <div className="widget">
           <div id="world-id-container"></div>
         </div>
       </section>

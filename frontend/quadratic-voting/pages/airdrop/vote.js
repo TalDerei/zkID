@@ -157,18 +157,18 @@ export default function Enter() {
 
   return (
     <main ref={vantaRef}>
-      <section class="general">
+      <section className="general">
         <br></br>
         <br></br>
-        <div class="wager">
+        <div className="wager">
             <large><b>VOTING POLL</b></large>
           <br></br>
           <br></br>
-          <div class="homepag-sub">
+          <div className="homepag-sub">
             {/* <small>kdmnksd</small> */}
           </div>
-          <button class="button button1 key" onClick={VoteCandidateA}>Candidate A</button>
-          <button class="button button1 key" onClick={VoteCandidateB}>Candidate B</button>
+          <button className="button button1 key" onClick={VoteCandidateA}>Candidate A</button>
+          <button className="button button1 key" onClick={VoteCandidateB}>Candidate B</button>
         </div>
           <div>
             <br></br>
@@ -176,11 +176,11 @@ export default function Enter() {
           </div>
           <div>
         </div>
-        <div class="proof-new">
-            <div class="card-header">
+        <div className="proof-new">
+            <div className="card-header">
                 <b>Score:</b>
             </div>
-            <div class="card-body">
+            <div className="card-body">
                 {state.candidateAScore === ''?
             <div>
             </div> :
@@ -190,11 +190,11 @@ export default function Enter() {
             }
             </div>
         </div>
-        <div class="proof-new-2">
-            <div class="card-header">
+        <div className="proof-new-2">
+            <div className="card-header">
                 <b>Score:</b>
             </div>
-            <div class="card-body">
+            <div className="card-body">
                 {state.candidateBScore === ''?
             <div>
             </div> :
@@ -204,15 +204,15 @@ export default function Enter() {
             }
             </div>
         </div>
-        <div class="test-lottery">
+        <div className="test-lottery">
           <p>
           <Link href='/airdrop/test' passHref>
-            <a class="test">
+            <a className="test">
             </a>
           </Link>
           </p>
         </div>
-        <div className="mb-10">
+        <div classNameName="mb-10">
           <GoBack />
         </div>
         <div>
