@@ -27,6 +27,7 @@
     "@appliedzkp/semaphore-contracts": "^0.10.0",
     "@openzeppelin/contracts": "^4.6.0",
     "@typechain/hardhat": "^6.1.2",
+    "@worldcoin/id": "^0.3.0",
     "@worldcoin/world-id-contracts": "^0.1.1",
     "@zk-kit/identity": "^1.4.1",
     "@zk-kit/protocols": "^1.11.1",

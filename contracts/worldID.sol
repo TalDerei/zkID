@@ -52,6 +52,5 @@ contract Contract {
         nullifierHashes[nullifierHash] = true;
 
         // vote function call
-        
     }
 }

@@ -8,34 +8,52 @@ import Footer from "../../components/footer";
 import ViewSourceCode from "../../components/viewSourceCode";
 import AIRDROP_JSON from "../../abi/Minting.json";
 import { providers, Contract, ethers, BigNumber } from 'ethers';
+import worldID from "@worldcoin/id";
 
 export default function Enter() {
     const [state, setState] = useState ({
-        transactionHash: "",
+        transactionHash: "",        
     });
 
-    let collectTokens = () => {
+    let Collect = () => {
         collect();
     }
 
+    let Verify = () => {
+        verify();
+    }
+    
     async function collect() {
-      let provider = new providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      let signer = provider.getSigner();
-      let address = await signer.getAddress();
-      console.log("address is: " + address)
+        let provider = new providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        let contract = new Contract("0x95C8DB31aDC590046ce6C4371524BaA900Dbc4a0", AIRDROP_JSON.abi, provider.getSigner());
 
-      // need to fix
-      let contract = new Contract("0x9Cb4Fb9728aE2b5494eee172FF978d84c8e938F6", AIRDROP_JSON.abi, provider.getSigner());
-
-      try {
-          let tx = await contract.random();
-          console.log(tx.hash)
-          state.transactionHash = tx.hash;
-          alert("ERC-20 collected. Transaction hash is: " + state.transactionHash);
-      } catch (error) {
-          alert("Airdrop collection failed: " + error['data']['message'])
+        try {
+            let tx = await contract.mint();
+            await tx.wait()
+            console.log(tx.hash)
+            state.transactionHash = tx.hash;
+            alert("Airdrop collected. Transaction hash is: " + state.transactionHash);
+        } catch (error) {
+            alert("Airdrop collection failed: " + error['data']['message'])
+        }
+        setState({...state})
       }
+
+    async function verify() {
+        try {
+            worldID.init("world-id-container", {
+                enable_telemetry: true,
+                action_id: "wid_staging_28d5da7ab7b8ee3c993c951857641097",
+                signal: "yourSignal"
+            });
+        }
+            catch (failure) {
+        }
+
+        const result = await worldID.enable();
+        console.log(result)
+        
       setState({...state})
     }
 
@@ -73,25 +91,29 @@ export default function Enter() {
         <br></br>
         <br></br>
         <div class="wager">
-            <large><b>GET TOKENS</b></large>
+            <large><b>WORLD ID VERIFICATION</b></large>
           <br></br>
           <br></br>
           <div class="homepag-sub">
             {/* <small>kdmnksd</small> */}
           </div>
-          <button class="button button1 key" onClick={collectTokens}>Recieve Random Amount of Tokens</button>
+          <button class="button button1 key" onClick={Collect}>Airdrop Tokens</button>
+          <button class="button button1 key" onClick={Verify}>Verify Worldcoin ID</button>
+              <Link href='/airdrop/vote' passHref>
+                <button class="button button1 key">Vote in Poll</button>
+              </Link>
         </div>
           <div class="card-commitment">
             <div class="card-header">
             <b>Transaction Hash:</b>
             </div>
             <div class="card-body">
-              {state.commitment === ''?
+              {state.transactionHash === ''?
                 <div>
                 </div> 
               :
                 <div>
-                  {state.commitment}
+                  {state.transactionHash}
                 </div>
               }
             </div>
@@ -119,6 +141,7 @@ export default function Enter() {
         <div>
             <ViewSourceCode />
         </div>
+        <div id="world-id-container"></div>
       </section>
       
     </main>

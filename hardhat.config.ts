@@ -6,17 +6,10 @@ require("dotenv").config();
 module.exports = {
   solidity: "0.8.11",
   networks: {
-    mumbai: {
-        url: process.env.MUMBAI_URL || '',
-        accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    },
-  },
-  gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
-  },
-  etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+      testnet: {
+        url: `https://rpc-mumbai.maticvigil.com`,
+        accounts: [process.env.TESTNET_PRIVATE_KEY],
+      },
   },
   dependencyCompiler: {
     paths: [
