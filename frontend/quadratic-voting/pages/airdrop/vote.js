@@ -28,11 +28,11 @@ export default function Enter() {
     async function voteA() {
         let providerERC20 = new providers.Web3Provider(window.ethereum);
         await providerERC20.send("eth_requestAccounts", []);
-        let contractERC20 = new Contract("0x8a841773f69C245E45654536d552baa0A086FAf6", AIRDROP_JSON.abi, providerERC20.getSigner());
+        let contractERC20 = new Contract("0xf732888FcCad9DEc322AC365Da0341f25fCFff06", AIRDROP_JSON.abi, providerERC20.getSigner());
 
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
+        let contract = new Contract("0x7cfC78f1C21041a476000773AcA2731AecC6FEc8", VOTING_JSON.abi, provider.getSigner());
         let signer = provider.getSigner();
         let address = await signer.getAddress();
         console.log(address)
@@ -41,6 +41,7 @@ export default function Enter() {
 
         try {
             let tx = await contract.voteForCandidate(0, address, 3232323232, balance);
+
             let votesCast = await contract.voterVotesCast(address)
             let votesRecognized = await contract.voterVotesRecognised(address)
             alert("Vote successfull! You had a balance of: " + votesCast);
@@ -62,11 +63,11 @@ export default function Enter() {
     async function voteB() {
         let providerERC20 = new providers.Web3Provider(window.ethereum);
         await providerERC20.send("eth_requestAccounts", []);
-        let contractERC20 = new Contract("0x8a841773f69C245E45654536d552baa0A086FAf6", AIRDROP_JSON.abi, providerERC20.getSigner());
+        let contractERC20 = new Contract("0xf732888FcCad9DEc322AC365Da0341f25fCFff06", AIRDROP_JSON.abi, providerERC20.getSigner());
 
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
+        let contract = new Contract("0x7cfC78f1C21041a476000773AcA2731AecC6FEc8", VOTING_JSON.abi, provider.getSigner());
         let signer = provider.getSigner();
         let address = await signer.getAddress();
         console.log(address)
@@ -74,7 +75,8 @@ export default function Enter() {
         console.log(balance)
 
         try {
-            let tx = await contract.voteForCandidate(1, address, 3232323232, balance);
+            let tx = await contract.voteForCandidate(1, address, 3232323233, balance);
+
             let votesCast = await contract.voterVotesCast(address)
             let votesRecognized = await contract.voterVotesRecognised(address)
             alert("Vote successfull! You had a balance of: " + votesCast);
@@ -96,7 +98,7 @@ export default function Enter() {
     async function voteAEffect() {
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
+        let contract = new Contract("0x7cfC78f1C21041a476000773AcA2731AecC6FEc8", VOTING_JSON.abi, provider.getSigner());
 
         try {
             let votesTotal = await contract.totalVotesFor(0);
@@ -111,7 +113,7 @@ export default function Enter() {
     async function voteBEffect() {
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
+        let contract = new Contract("0x7cfC78f1C21041a476000773AcA2731AecC6FEc8", VOTING_JSON.abi, provider.getSigner());
 
         try {
             let votesTotal = await contract.totalVotesFor(1);
@@ -151,6 +153,9 @@ export default function Enter() {
   }, [vantaEffect])
 
   useEffect(() => {
+    if (typeof window == 'undefined') {
+        console.log("woooooo")
+    }
     voteAEffect()
     voteBEffect()
 }, []);

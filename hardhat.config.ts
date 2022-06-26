@@ -10,6 +10,10 @@ module.exports = {
         url: `https://rpc-mumbai.maticvigil.com`,
         accounts: [process.env.TESTNET_PRIVATE_KEY],
       },
+      optimism: {
+        url: `https://kovan.optimism.io/`,
+        accounts: [process.env.TESTNET_PRIVATE_KEY],
+      },
   },
   dependencyCompiler: {
     paths: [
