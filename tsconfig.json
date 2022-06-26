@@ -9,5 +9,5 @@
       "downlevelIteration": true
     },
     "include": ["./scripts", "./test"],
-    "files": ["./hardhat.config.js"]
+    "files": ["./hardhat.config.ts"]
   }

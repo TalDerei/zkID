@@ -3,6 +3,8 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@zk-kit/identity": "^1.4.1",
+    "@zk-kit/protocols": "^1.11.0",
     "chai": "^4.3.6",
     "dotenv": "^16.0.1",
     "eslint": "^7.32.0",
@@ -22,8 +24,12 @@
     "solidity-coverage": "^0.7.21"
   },
   "dependencies": {
+    "@appliedzkp/semaphore-contracts": "^0.10.0",
     "@openzeppelin/contracts": "^4.6.0",
     "@typechain/hardhat": "^6.1.2",
+    "@worldcoin/world-id-contracts": "^0.1.1",
+    "@zk-kit/identity": "^1.4.1",
+    "@zk-kit/protocols": "^1.11.1",
     "ts-node": "^10.8.1"
   }
 }
