@@ -36,10 +36,10 @@ export default function About() {
 
   return (
     <main ref={vantaRef}>
-      <section class="general">
-        <div class="homepage-about">
+      <section className="general">
+        <div className="homepage-about">
           <large><b>ABOUT</b></large>
-          <div class="homepage-sub">
+          <div className="homepage-sub">
             <p><u>zkID</u> description in progress!
             </p>
           </div>
