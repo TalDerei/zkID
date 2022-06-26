@@ -26,7 +26,7 @@ export default function Enter() {
     async function collect() {
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0x95C8DB31aDC590046ce6C4371524BaA900Dbc4a0", AIRDROP_JSON.abi, provider.getSigner());
+        let contract = new Contract("0xd7f4315f0ad69858e54e1336b56383efEE2b8e56", AIRDROP_JSON.abi, provider.getSigner());
 
         try {
             let tx = await contract.mint();

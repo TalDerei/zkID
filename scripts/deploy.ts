@@ -22,7 +22,7 @@ async function main() {
     const ContractFactory = await ethers.getContractFactory('Contract')
     const contract = await ContractFactory.deploy(worldIDAddress)
     await contract.deployed()
-    console.log('Contract deployed to:', contract.address)
+    console.log('WorldID Contract Address:', contract.address)
 }
 
 main().catch(error => {

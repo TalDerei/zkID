@@ -50,7 +50,5 @@ contract Contract {
 
         // finally, we record they've done this, so they can't do it again (proof of uniqueness)
         nullifierHashes[nullifierHash] = true;
-
-        // vote function call
     }
 }

@@ -5,6 +5,7 @@ contract Voting {
 
   mapping (uint256 => uint256) public votesCast;
   mapping (uint256 => uint256) public votesRecognised;
+  mapping (address => uint256) public addresstoNullifier;
   
   bytes32[] public candidateList;
 
@@ -17,27 +18,28 @@ contract Voting {
     candidateB = 1;
   }
 
-  function totalVotesFor(uint8 candidate) public returns (uint256) {
-    require(validCandidate(candidate));
+  function totalVotesFor(uint8 candidate) public view returns (uint256) {
+    // require(validCandidate(candidate));
     return votesReceived[candidate];
   }
 
-  function voteForCandidate(uint8 candidate, uint256 voter, uint256 votes) public {
+  function voteForCandidate(uint8 candidate, address wallet, uint256 voter, uint256 votes) public {
     require(votes > 0);
     require(validCandidate(candidate));
-    votesCast[voter] += votes;
+    addresstoNullifier[wallet] = voter;
+    votesCast[voter] = votes;
     uint256 votesRegistered = _quadVote(votesCast[voter]);
-    votesReceived[candidate] -= votesRecognised[voter];
-    votesReceived[candidate] += votesRegistered;
+    votesReceived[candidate] -= votesRecognised[voter]; 
+    votesReceived[candidate] += votesRegistered; 
     votesRecognised[voter] = votesRegistered;
   }
 
-  function voterVotesCast(uint256 voter) public returns (uint256) {
-    return votesCast[voter];
+  function voterVotesCast(address voter) public view returns (uint256) {
+    return votesCast[addresstoNullifier[voter]];
   }
   
-  function voterVotesRecognised(uint256 voter) public returns (uint256) {
-    return votesRecognised[voter];
+  function voterVotesRecognised(address voter) public view returns (uint256) {
+      return votesRecognised[addresstoNullifier[voter]];
   }
 
   // we cap votes to 10 to prevent overwhelmingly large wallets from hijacking the votes

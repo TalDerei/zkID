@@ -157,6 +157,9 @@ body {
 .card-commitment{
   position:fixed; left:250px; bottom:195px;
 }
+.card-commitment-2{
+  position:fixed; left:400px; bottom:195px;
+}
 
 .commitment {
   background-color: white; 
