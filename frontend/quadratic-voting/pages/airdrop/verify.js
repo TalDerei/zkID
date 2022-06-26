@@ -7,6 +7,7 @@ import Link from "next/link";
 import Footer from "../../components/footer";
 import ViewSourceCode from "../../components/viewSourceCode";
 import AIRDROP_JSON from "../../abi/Minting.json";
+import WORLDID_JSON from "../../abi/Contract.json";
 import { providers, Contract, ethers, BigNumber } from 'ethers';
 import worldID from "@worldcoin/id";
 
@@ -26,7 +27,7 @@ export default function Enter() {
     async function collect() {
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0xd7f4315f0ad69858e54e1336b56383efEE2b8e56", AIRDROP_JSON.abi, provider.getSigner());
+        let contract = new Contract("0x8a841773f69C245E45654536d552baa0A086FAf6", AIRDROP_JSON.abi, provider.getSigner());
 
         try {
             let tx = await contract.mint();
@@ -41,6 +42,7 @@ export default function Enter() {
       }
 
     async function verify() {
+        console.log("Verify on Worldcoin!")
         try {
             worldID.init("world-id-container", {
                 enable_telemetry: true,
@@ -53,7 +55,21 @@ export default function Enter() {
 
         const result = await worldID.enable();
         console.log(result)
-        
+
+        // console.log("Verify on our own smart contract!")
+        // let provider = new providers.Web3Provider(window.ethereum);
+        // await provider.send("eth_requestAccounts", []);
+        // let contract = new Contract("0x3b19c587766613D4fb3208FB954241381Fb98243", WORLDID_JSON.abi, provider.getSigner());
+        // let signer = provider.getSigner();
+        // let address = await signer.getAddress();
+
+        // try {
+        //     let tx = await contract.verifyAndExecute(address, result.merkle_root, result.nullifier_hash, result.proof);
+        //     await tx;
+        // } catch (error) {
+        //     alert("Airdrop collection failed: " + error['data']['message'])
+        // }
+
       setState({...state})
     }
 
@@ -141,7 +157,9 @@ export default function Enter() {
         <div>
             <ViewSourceCode />
         </div>
-        <div id="world-id-container"></div>
+        <div class="widget">
+          <div id="world-id-container"></div>
+        </div>
       </section>
       
     </main>

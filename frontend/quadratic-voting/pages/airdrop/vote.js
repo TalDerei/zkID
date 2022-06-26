@@ -28,11 +28,11 @@ export default function Enter() {
     async function voteA() {
         let providerERC20 = new providers.Web3Provider(window.ethereum);
         await providerERC20.send("eth_requestAccounts", []);
-        let contractERC20 = new Contract("0xd7f4315f0ad69858e54e1336b56383efEE2b8e56", AIRDROP_JSON.abi, providerERC20.getSigner());
+        let contractERC20 = new Contract("0x8a841773f69C245E45654536d552baa0A086FAf6", AIRDROP_JSON.abi, providerERC20.getSigner());
 
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0x1d55C4e6be13250Fe4Ad8E0Fa4CC41D3246768F3", VOTING_JSON.abi, provider.getSigner());
+        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
         let signer = provider.getSigner();
         let address = await signer.getAddress();
         console.log(address)
@@ -44,12 +44,12 @@ export default function Enter() {
             let votesCast = await contract.voterVotesCast(address)
             let votesRecognized = await contract.voterVotesRecognised(address)
             alert("Vote successfull! You had a balance of: " + votesCast);
-            alert("Voting power of: " + votesRecognized);
+            alert("This equates to voting power of: " + votesRecognized);
             
             let votesTotal = await contract.totalVotesFor(0);
             console.log("total votes are: " + votesTotal)
 
-            state.candidateAScore = votesTotal + 0;
+            state.candidateAScore = votesTotal * 1;
             
             alert("candidateAScore is: " + state.candidateAScore);
 
@@ -62,11 +62,11 @@ export default function Enter() {
     async function voteB() {
         let providerERC20 = new providers.Web3Provider(window.ethereum);
         await providerERC20.send("eth_requestAccounts", []);
-        let contractERC20 = new Contract("0x9F0BA1ABF4510d98f7B2e45e2511C4f51c64ee54", AIRDROP_JSON.abi, providerERC20.getSigner());
+        let contractERC20 = new Contract("0x8a841773f69C245E45654536d552baa0A086FAf6", AIRDROP_JSON.abi, providerERC20.getSigner());
 
         let provider = new providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
-        let contract = new Contract("0xE7c499cc17dD7F89e9dA5D074496105f408874ED", VOTING_JSON.abi, provider.getSigner());
+        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
         let signer = provider.getSigner();
         let address = await signer.getAddress();
         console.log(address)
@@ -78,15 +78,44 @@ export default function Enter() {
             let votesCast = await contract.voterVotesCast(address)
             let votesRecognized = await contract.voterVotesRecognised(address)
             alert("Vote successfull! You had a balance of: " + votesCast);
-            alert("Voting power of: " + votesRecognized);
+            alert("This equates to voting power of: " + votesRecognized);
             
-            let votesTotal = await contract.totalVotesFor(0);
+            let votesTotal = await contract.totalVotesFor(1);
             console.log("total votes are: " + votesTotal)
 
-            state.candidateAScore = votesTotal + 0;
+            state.candidateBScore = votesTotal * 1;
             
-            alert("candidateAScore is: " + state.candidateBScore);
+            alert("candidateBScore is: " + state.candidateBScore);
 
+        } catch (error) {
+            alert("Airdrop collection failed: " + error['data']['message'])
+        }
+        setState({...state})
+    }
+
+    async function voteAEffect() {
+        let provider = new providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
+
+        try {
+            let votesTotal = await contract.totalVotesFor(0);
+            state.candidateAScore = votesTotal * 1;
+    
+        } catch (error) {
+            alert("Airdrop collection failed: " + error['data']['message'])
+        }
+        setState({...state})
+    }
+
+    async function voteBEffect() {
+        let provider = new providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        let contract = new Contract("0x6608434e5b85D4567eb9c70fabC2480f7d33d343", VOTING_JSON.abi, provider.getSigner());
+
+        try {
+            let votesTotal = await contract.totalVotesFor(1);
+            state.candidateBScore = votesTotal * 1;
         } catch (error) {
             alert("Airdrop collection failed: " + error['data']['message'])
         }
@@ -121,6 +150,11 @@ export default function Enter() {
     }
   }, [vantaEffect])
 
+  useEffect(() => {
+    voteAEffect()
+    voteBEffect()
+}, []);
+
   return (
     <main ref={vantaRef}>
       <section class="general">
@@ -152,6 +186,20 @@ export default function Enter() {
             </div> :
             <div>
                 {state.candidateAScore}
+            </div>
+            }
+            </div>
+        </div>
+        <div class="proof-new-2">
+            <div class="card-header">
+                <b>Score:</b>
+            </div>
+            <div class="card-body">
+                {state.candidateBScore === ''?
+            <div>
+            </div> :
+            <div>
+                {state.candidateBScore}
             </div>
             }
             </div>

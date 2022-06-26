@@ -161,6 +161,10 @@ body {
   position:fixed; left:400px; bottom:195px;
 }
 
+.widget{
+  position:fixed; left:580px; bottom:295px;
+}
+
 .commitment {
   background-color: white; 
   color: black; 
@@ -283,7 +287,17 @@ body {
 .proof-new {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 25px;
-  position:fixed; left:200px; bottom:115px;
+  position:fixed; left:550px; bottom:315px;
+  width: 950px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.proof-new-2{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 25px;
+  position:fixed; left:800px; bottom:315px;
   width: 950px;
   white-space: nowrap;
   overflow: hidden;
