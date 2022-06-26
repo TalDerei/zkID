@@ -9,7 +9,6 @@ import ViewSourceCode from "../../components/viewSourceCode";
 import AIRDROP_JSON from "../../abi/Minting.json";
 import VOTING_JSON from "../../abi/Voting.json";
 import { providers, Contract, ethers, BigNumber } from 'ethers';
-import worldID from "@worldcoin/id";
 
 export default function Enter() {
     const [state, setState] = useState ({
