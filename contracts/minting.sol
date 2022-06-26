@@ -10,7 +10,7 @@ contract Minting is ERC20 {
 
     function mint() public {
         // Transfer and collect erc-20 airdrop
-        _mint(msg.sender, 100000 * 10**uint(decimals()));
+        _mint(msg.sender, 100 * 10**uint(decimals()));
     }
 }
 

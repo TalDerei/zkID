@@ -25,6 +25,13 @@ export default function Enter() {
     
     async function voteA() {
         console.log('voting A')
+
+        let provider = new providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        let contract = new Contract("0x95C8DB31aDC590046ce6C4371524BaA900Dbc4a0", AIRDROP_JSON.abi, provider.getSigner());
+
+        // bytes32 candidate, uint256 voter, uint256 votes
+
     }
 
     async function voteB() {
