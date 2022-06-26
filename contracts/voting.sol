@@ -1,27 +1,28 @@
 pragma solidity ^0.8.11;
 
 contract Voting {
-  mapping (bytes32 => uint256) public votesReceived;
-  mapping (bytes32 => bool) public candidateRegistered;
+  mapping (uint8 => uint256) public votesReceived;
 
   mapping (uint256 => uint256) public votesCast;
   mapping (uint256 => uint256) public votesRecognised;
   
   bytes32[] public candidateList;
 
-  constructor(bytes32[] memory candidateNames) public {
-    candidateList = candidateNames;
-    for (uint256 i=0; i < candidateNames.length; i++) {
-      candidateRegistered[candidateNames[i]] = true;
-    }
+  //  two candidates for sake of testing and demo, but we do support three or more
+  uint8 public candidateA;
+  uint8 public candidateB;
+
+  constructor() public {
+    candidateA = 0;
+    candidateB = 1;
   }
 
-  function totalVotesFor(bytes32 candidate) public returns (uint256) {
+  function totalVotesFor(uint8 candidate) public returns (uint256) {
     require(validCandidate(candidate));
     return votesReceived[candidate];
   }
 
-  function voteForCandidate(bytes32 candidate, uint256 voter, uint256 votes) public {
+  function voteForCandidate(uint8 candidate, uint256 voter, uint256 votes) public {
     require(votes > 0);
     require(validCandidate(candidate));
     votesCast[voter] += votes;
@@ -74,7 +75,7 @@ contract Voting {
     return 10;
   }
 
-  function validCandidate(bytes32 candidate) public returns (bool) {
-    return candidateRegistered[candidate];
+  function validCandidate(uint8 candidate) public returns (bool) {
+    return (candidate == 0 || candidate == 1);
   }
 }
