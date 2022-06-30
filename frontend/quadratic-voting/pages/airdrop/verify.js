@@ -9,9 +9,9 @@ import ViewSourceCode from "../../components/viewSourceCode";
 import AIRDROP_JSON from "../../abi/Minting.json";
 import WORLDID_JSON from "../../abi/Contract.json";
 import { providers, Contract, ethers, BigNumber } from 'ethers';
-// import worldID from "@worldcoin/id";
-import dynamic from "next/dynamic"
-const worldID = dynamic(()=>import('@worldcoin/id'), {ssr:false}) 
+import worldID from "@worldcoin/id";
+// import dynamic from "next/dynamic"
+// const worldID = dynamic(()=>import('@worldcoin/id'), {ssr:false}) 
 
 export default function Enter() {
     const [state, setState] = useState ({
