@@ -44,37 +44,43 @@ contract Voting {
 
   // we cap votes to 10 to prevent overwhelmingly large wallets from hijacking the votes
   function _quadVote(uint256 votes) private returns (uint256) {
-    if (votes < 1) {
-      return 0;
+    uint256 currVote = 0;
+    while(votes > (currVote+1)^2){
+      currVote ++;
+      votes -= currVote^2;
     }
-    if (votes < 4) {
-      return 1;
-    }
-    if (votes < 9) {
-      return 2;
-    }
-    if (votes < 16) {
-      return 3;
-    }
-    if (votes < 25) {
-      return 4;
-    }
-    if (votes < 36) {
-      return 5;
-    }
-    if (votes < 49) {
-      return 6;
-    }
-    if (votes < 64) {
-      return 7;
-    }
-    if (votes < 81) {
-      return 8;
-    }
-    if (votes < 100) {
-      return 9;
-    }
-    return 10;
+    return currVote;
+    // if (votes < 1) {
+    //   return 0;
+    // }
+    // if (votes < 4) {
+    //   return 1;
+    // }
+    // if (votes < 9) {
+    //   return 2;
+    // }
+    // if (votes < 16) {
+    //   return 3;
+    // }
+    // if (votes < 25) {
+    //   return 4;
+    // }
+    // if (votes < 36) {
+    //   return 5;
+    // }
+    // if (votes < 49) {
+    //   return 6;
+    // }
+    // if (votes < 64) {
+    //   return 7;
+    // }
+    // if (votes < 81) {
+    //   return 8;
+    // }
+    // if (votes < 100) {
+    //   return 9;
+    // }
+    // return 10;
   }
 
   function validCandidate(uint8 candidate) public returns (bool) {
